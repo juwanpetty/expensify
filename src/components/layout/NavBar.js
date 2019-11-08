@@ -10,7 +10,7 @@ const NavBar = () => {
         Dashboard
       </Link>
       <Link to="/create" activeStyle={ActiveLink}>
-        Create Expense
+        \Create Expense
       </Link>
       <Link to="/edit" activeStyle={ActiveLink}>
         Edit Expense
