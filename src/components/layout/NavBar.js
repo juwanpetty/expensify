@@ -12,9 +12,6 @@ const NavBar = () => {
       <Link to="/create" activeStyle={ActiveLink}>
         Create Expense
       </Link>
-      <Link to="/edit" activeStyle={ActiveLink}>
-        Edit Expense
-      </Link>
       <Link to="/help" activeStyle={ActiveLink}>
         Help
       </Link>
