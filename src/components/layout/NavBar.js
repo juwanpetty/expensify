@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-const Header = () => {
+const NavBar = () => {
   return (
     <NavContainer>
       <Logo>Expensify</Logo>
@@ -45,4 +45,4 @@ const ActiveLink = {
   color: "#303446"
 };
 
-export default Header;
+export default NavBar;
