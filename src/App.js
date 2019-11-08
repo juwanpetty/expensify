@@ -2,7 +2,7 @@ import React from "react";
 import AppRoutes from "./routes/AppRoutes";
 
 // playground
-import "./playground/redux-101";
+import "./playground/redux-expensify";
 
 function App() {
   return (

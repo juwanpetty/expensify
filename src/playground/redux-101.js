@@ -4,7 +4,7 @@ const initialState = {
   count: 0
 };
 
-const store = createStore((state = initialState, action) => {
+const countReducer = (state = initialState, action) => {
   switch (action.type) {
     case "INCREMENT":
       return {
@@ -25,7 +25,9 @@ const store = createStore((state = initialState, action) => {
     default:
       return state;
   }
-});
+};
+
+const store = createStore(countReducer);
 
 store.subscribe(() => {
   console.log(store.getState());
