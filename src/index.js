@@ -1,26 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import { Provider } from "react-redux";
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
-import configureStore from "./store/configureStore";
-
 import { addExpense } from "./store/actions/expensesAction";
-import { setTextFilter } from "./store/actions/filtersAction";
 import getVisibleExpense from "./store/selectors/expensesSelector";
+import configureStore from "./store/configureStore";
+import * as serviceWorker from "./serviceWorker";
+import "./index.css";
 
 const store = configureStore();
 
-store.dispatch(addExpense({ description: "Water bill" }));
-store.dispatch(addExpense({ description: "Gas bill" }));
-store.dispatch(setTextFilter("water"));
+store.dispatch(addExpense({ description: "Water bill", amount: 4500 }));
+store.dispatch(addExpense({ description: "Gas bill", createdAt: 1000 }));
+store.dispatch(addExpense({ description: "Rent", amount: 109500 }));
 
 const state = store.getState();
 const visibleExpenses = getVisibleExpense(state.expenses, state.filters);
 
-console.log(visibleExpenses);
+console.log({ visibleExpenses });
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
