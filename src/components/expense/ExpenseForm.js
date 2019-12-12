@@ -9,7 +9,8 @@ class ExpenseForm extends Component {
     note: "",
     amount: "",
     cretaedAt: moment(),
-    calendarFocused: false
+    calendarFocused: false,
+    formError: null
   };
 
   onDescriptionChange = event => {
@@ -29,7 +30,7 @@ class ExpenseForm extends Component {
   onAmountChange = event => {
     const amount = event.target.value;
 
-    if (amount.match(/^\d*(\.\d{0,2})?$/)) {
+    if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
       this.setState({
         amount
       });
@@ -37,19 +38,47 @@ class ExpenseForm extends Component {
   };
 
   onDateChange = cretaedAt => {
-    this.setState({
-      cretaedAt
-    });
+    if (cretaedAt) {
+      this.setState({
+        cretaedAt
+      });
+    }
   };
 
   onFocusChange = ({ focused }) => {
     this.setState({ calendarFocused: focused });
   };
 
+  onSubmit = event => {
+    event.preventDefault();
+
+    if (!this.state.description || !this.state.amount) {
+      this.setState({
+        formError: "Please provide description and amount"
+      });
+    } else {
+      this.setState({
+        formError: null
+      });
+
+      this.props.onSubmit({
+        description: this.state.description,
+        note: this.state.note,
+        amount: parseFloat(this.state.amount, 10) * 100,
+        cretaedAt: this.state.cretaedAt.valueOf()
+      });
+    }
+  };
+
   render() {
+    const errorMarkup = this.state.formError ? (
+      <p>{this.state.formError}</p>
+    ) : null;
+
     return (
       <div>
-        <form>
+        {errorMarkup}
+        <form onSubmit={this.onSubmit}>
           <input
             type="text"
             name=""
