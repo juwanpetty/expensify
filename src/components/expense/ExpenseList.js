@@ -6,6 +6,7 @@ import selectExpenses from "../../store/selectors/expensesSelector";
 const ExpenseList = ({ expenses }) => {
   return (
     <div>
+      <h1>Expense List</h1>
       {expenses.map(expense => (
         <ExpenseListItem key={expense.id} {...expense} />
       ))}

@@ -1,41 +1,74 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
+import { DateRangePicker } from "react-dates";
 import {
   setTextFilter,
+  setStartDate,
+  setEndDate,
   sortByAmount,
   sortByDate
 } from "../../store/actions/filtersAction";
 
-const ExpenseListFilters = ({ filters, dispatch }) => {
-  const onChangeInput = event => {
-    dispatch(setTextFilter(event.target.value));
+class ExpenseListFilters extends Component {
+  state = {
+    calendarFocused: null
+  };
+
+  onChangeInput = event => {
+    this.props.dispatch(setTextFilter(event.target.value));
     console.log(event.target.value);
   };
 
-  const onChangeSelect = event => {
+  onChangeSelect = event => {
     if (event.target.value === "date") {
-      dispatch(sortByDate());
+      this.props.dispatch(sortByDate());
     } else {
-      dispatch(sortByAmount());
+      this.props.dispatch(sortByAmount());
     }
 
     console.log(event.target.value);
   };
 
-  return (
-    <div>
-      <input
-        type="text"
-        onChange={event => onChangeInput(event)}
-        value={filters.text}
-      />
-      <select value={filters.sortBy} onChange={event => onChangeSelect(event)}>
-        <option value="date">Date</option>
-        <option value="amount">Amount</option>
-      </select>
-    </div>
-  );
-};
+  onDatesChange = ({ startDate, endDate }) => {
+    this.props.dispatch(setStartDate(startDate));
+    this.props.dispatch(setEndDate(endDate));
+  };
+
+  onFocusChange = calendarFocused => {
+    this.setState({
+      calendarFocused
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <input
+          type="text"
+          onChange={event => this.onChangeInput(event)}
+          value={this.props.filters.text}
+        />
+        <select
+          value={this.props.filters.sortBy}
+          onChange={event => this.onChangeSelect(event)}
+        >
+          <option value="date">Date</option>
+          <option value="amount">Amount</option>
+        </select>
+        <DateRangePicker
+          startDate={this.props.filters.startDate}
+          endDate={this.props.filters.endDate}
+          onDatesChange={() => this.onDatesChange}
+          focusedInput={this.state.calendarFocused}
+          onFocusChange={this.onFocusChange}
+          showClearDates={true}
+          numberOfMonths={1}
+          isOutsideRange={() => false}
+        />
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {
