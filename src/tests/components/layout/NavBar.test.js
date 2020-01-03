@@ -1,9 +1,13 @@
 import React from "react";
-import ReactShallowRenderer from "react-test-renderer/shallow";
+import { shallow } from "enzyme";
+import toJSON from "enzyme-to-json";
 import NavBar from "../../../components/layout/NavBar";
 
 it("should render NavBar correctly", () => {
-  const renderer = new ReactShallowRenderer();
-  renderer.render(<NavBar />);
-  expect(renderer.getRenderOutput()).toMatchSnapshot();
+  const wrapper = shallow(<NavBar />);
+  expect(toJSON(wrapper)).toMatchSnapshot();
+
+  // const renderer = new ReactShallowRenderer();
+  // renderer.render(<NavBar />);
+  // expect(renderer.getRenderOutput()).toMatchSnapshot();
 });

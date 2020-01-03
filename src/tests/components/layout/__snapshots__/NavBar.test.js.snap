@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render NavBar correctly 1`] = `
-<ForwardRef(styled.nav)>
-  <ForwardRef(styled.h1)>
+<styled.nav>
+  <styled.h1>
     Expensify
-  </ForwardRef(styled.h1)>
-  <ForwardRef(Styled(NavLink))
+  </styled.h1>
+  <Styled(NavLink)
     activeStyle={
       Object {
         "color": "#303446",
@@ -15,8 +15,8 @@ exports[`should render NavBar correctly 1`] = `
     to="/"
   >
     Dashboard
-  </ForwardRef(Styled(NavLink))>
-  <ForwardRef(Styled(NavLink))
+  </Styled(NavLink)>
+  <Styled(NavLink)
     activeStyle={
       Object {
         "color": "#303446",
@@ -25,8 +25,8 @@ exports[`should render NavBar correctly 1`] = `
     to="/create"
   >
     Create Expense
-  </ForwardRef(Styled(NavLink))>
-  <ForwardRef(Styled(NavLink))
+  </Styled(NavLink)>
+  <Styled(NavLink)
     activeStyle={
       Object {
         "color": "#303446",
@@ -35,6 +35,6 @@ exports[`should render NavBar correctly 1`] = `
     to="/help"
   >
     Help
-  </ForwardRef(Styled(NavLink))>
-</ForwardRef(styled.nav)>
+  </Styled(NavLink)>
+</styled.nav>
 `;
