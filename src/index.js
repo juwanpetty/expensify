@@ -5,6 +5,7 @@ import App from "./App";
 import configureStore from "./store/configureStore";
 import * as serviceWorker from "./serviceWorker";
 import "./index.css";
+import "./firebase/firebase";
 
 const store = configureStore();
 
