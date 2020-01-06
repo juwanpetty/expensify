@@ -13,9 +13,22 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-firebase
-  .database()
-  .ref()
-  .set({
-    name: "Juwan Petty"
-  });
+const database = firebase.database();
+
+database.ref().set({
+  name: "Juwan Petty",
+  age: 23,
+  isSingle: true,
+  location: {
+    city: "Atlanta",
+    country: "United States"
+  }
+});
+
+database.ref("age").set(22);
+database.ref("location/city").set("Savannah");
+
+database.ref("attributes").set({
+  height: "5, 11",
+  weight: "150 lbs"
+});
