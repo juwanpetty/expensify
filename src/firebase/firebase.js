@@ -15,12 +15,60 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-database.ref().on("value", snapshot => {
-  const val = snapshot.val();
-  console.log(`${val.name} is a ${val.job.title} at ${val.job.company}`);
+database.ref("expenses").on("child_removed", snapshot => {
+  console.log("snapshot.key", snapshot.val());
 });
 
-database.ref("job/company").set("Steam");
+database.ref("expenses").on("child_changed", snapshot => {
+  console.log("snapshot.key", snapshot.val());
+});
+
+database.ref("expenses").on("child_added", snapshot => {
+  console.log("snapshot.key", snapshot.val());
+});
+
+// database.ref("expenses").on("value", snapshot => {
+//   const expenses = [];
+//   snapshot.forEach(childSnapshot => {
+//     expenses.push({
+//       id: childSnapshot.key,
+//       ...childSnapshot.val()
+//     });
+//   });
+
+//   console.log(expenses);
+// });
+
+// database
+//   .ref("expenses")
+//   .once("value")
+//   .then(snapshot => {
+//     // console.log(snapshot.val());
+
+//     const expenses = [];
+//     snapshot.forEach(childSnapshot => {
+//       expenses.push({
+//         id: childSnapshot.key,
+//         ...childSnapshot.val()
+//       });
+//     });
+
+//     console.log(expenses);
+//   });
+
+// database.ref("notes/-Ly-YTYUcT4fnM9taNWG").remove();
+
+// database.ref("notes").push({
+//   title: "Course Topics",
+//   body: "React Native, Angular, Python"
+// });
+
+// database.ref().on("value", snapshot => {
+//   const val = snapshot.val();
+//   console.log(`${val.name} is a ${val.job.title} at ${val.job.company}`);
+// });
+
+// database.ref("job/company").set("Steam");
 
 // const onValueChange = database.ref().on(
 //   "value",
