@@ -15,12 +15,56 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
+database.ref().on("value", snapshot => {
+  const val = snapshot.val();
+  console.log(`${val.name} is a ${val.job.title} at ${val.job.company}`);
+});
+
+database.ref("job/company").set("Steam");
+
+// const onValueChange = database.ref().on(
+//   "value",
+//   snapshot => {
+//     console.log(snapshot.val());
+//   },
+//   error => {
+//     console.log("Error with data fetching:", error);
+//   }
+// );
+
+// setTimeout(() => {
+//   database.ref("age").set(21);
+// }, 3500);
+
+// setTimeout(() => {
+//   database.ref().off(onValueChange);
+// }, 7000);
+
+// setTimeout(() => {
+//   database.ref("age").set(30);
+// }, 10500);
+
+// database
+//   .ref()
+//   .once("value")
+//   .then(snapshot => {
+//     const val = snapshot.val();
+//     console.log(val);
+//   })
+//   .catch(error => {
+//     console.log("Error fetching data", error);
+//   });
+
 // database
 //   .ref()
 //   .set({
 //     name: "Juwan Petty",
 //     age: 23,
-//     isSingle: true,
+//     stressLevel: 6,
+//     job: {
+//       title: "Software Developer",
+//       company: "Google"
+//     },
 //     location: {
 //       city: "Atlanta",
 //       country: "United States"
@@ -33,12 +77,18 @@ const database = firebase.database();
 //     console.log("This failed.", error);
 //   });
 
-database
-  .ref("isSingle")
-  .remove()
-  .then(() => {
-    console.log("Remove succeeded.");
-  })
-  .catch(error => {
-    console.log("Remove failed:", error.message);
-  });
+// database.ref().update({
+//   stressLevel: 9,
+//   "job/company": "Amazon",
+//   "location/city": "Seattle"
+// });
+
+// database
+//   .ref("isSingle")
+//   .remove()
+//   .then(() => {
+//     console.log("Remove succeeded.");
+//   })
+//   .catch(error => {
+//     console.log("Remove failed:", error.message);
+//   });
